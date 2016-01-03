@@ -55,6 +55,17 @@ app.post('/todos', function (req, res){
 	res.json(body);
 })
 
+app.delete('/todos/:id', function (req, res) {
+	var todoId = parseInt(req.params.id, 10);
+	var matchedToDo = _.findWhere(todos, { id: todoId });
+	if (!matchedToDo) {
+		return res.status(400).json({"error":"no todo found"});
+	} else {
+		todos = _.without(todos, matchedToDo);
+		res.json({ "message": "item deleted" });
+	}
+});
+
 //app.use(middleware.logger);
 //app.use(middleware.requireAuthentication);
 
