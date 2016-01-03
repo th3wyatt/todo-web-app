@@ -1,0 +1,14 @@
+{
+  "name": "todo-web-app",
+  "version": "0.0.0",
+  "description": "todo-web-app",
+  "main": "server.js",
+  "author": "Jon",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.2"
+  }
+}
