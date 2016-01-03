@@ -1,7 +1,10 @@
 ﻿var express = require('express');
 var middleware = require('./middleware.js');
+var bodyParser = require('body-parser');
 var app = express();
 var PORT = process.env.PORT || 3000;
+var todoNextId = 4;
+
 var todos = [{
 		id: 1,
 		description: 'Meet mom for lunch',
@@ -16,10 +19,13 @@ var todos = [{
 		completed: true
 	}]
 
+app.use(bodyParser.json());
+
 //app.use(express.static(__dirname + '/public'));
 app.get('/', function (req, res) {
 	res.send('Todo API Root');
 });
+
 
 app.get('/todos', function (req, res) {
 	res.json(todos);
@@ -40,7 +46,16 @@ app.get('/todos/:id', function (req, res) {
 	}
 });
 
-app.use(middleware.logger);
+app.post('/todos', function (req, res){
+	var body = req.body;
+	
+	body.id = todoNextId;
+	todoNextId++;
+	todos.push(body);
+	res.json(body);
+})
+
+//app.use(middleware.logger);
 //app.use(middleware.requireAuthentication);
 
 //app.get('/about', middleware.requireAuthentication, function (req, res) {
