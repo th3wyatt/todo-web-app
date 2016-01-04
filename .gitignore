@@ -1,3 +1,4 @@
 node_modules/
 todo-web-app.njsproj
 .ntvs_analysis.dat
+data/*.sqlite
